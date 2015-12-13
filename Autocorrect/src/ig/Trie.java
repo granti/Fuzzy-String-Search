@@ -12,9 +12,9 @@ import java.util.Scanner;
  *
  */
 public class Trie {
-	Node root;
-	ArrayList<String> fuzzyResults;
-	int resultCount;
+	private Node root;
+	private ArrayList<String> fuzzyResults;
+	private int resultCount;
 	public static void main(String[] args){
 		Trie dict = new Trie("/usr/share/dict/words");
 		Scanner scan = new Scanner(System.in);
