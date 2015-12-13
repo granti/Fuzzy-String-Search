@@ -5,6 +5,11 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Trie to store and search a dictionary.
+ * @author Ian Grant
+ *
+ */
 public class Trie {
 	Node root;
 	ArrayList<String> fuzzyResults;
@@ -30,6 +35,10 @@ public class Trie {
 		}
 		scan.close();
 	}
+	/**
+	 * Constructor for Trie.
+	 * @param file Path of dictionary text file.
+	 */
 	public Trie(String file){
 		fuzzyResults = new ArrayList<String>();
 		resultCount = 0;
@@ -66,9 +75,10 @@ public class Trie {
 		}
 	}
 	/**
-	 * Checks if a word is in the dictionary
-	 * 
-	 **/
+	 * Checks if a string is in the Trie.
+	 * @param term String to search for.
+	 * @return String is in the dictionary.
+	 */
 	public boolean inDict(String term){
 		Node current = root;
 		Node previous = root.child;
@@ -87,6 +97,13 @@ public class Trie {
 		}
 		return previous.wordEnd;
 	}
+	/**
+	 * Searches for strings within a maximum Levenshtein Distance of the search term.
+	 * @param term String to search for close matches in the dictionary.
+	 * @param maxDist Maximum Levenshtein Distance to return results within.
+	 * @param result Array to store results in.
+	 * @return Number of results returned.
+	 */
 	public int fuzzySearch(String term, int maxDist, String[] result){
 		fuzzyResults.clear();
 		resultCount = 0;
@@ -97,7 +114,7 @@ public class Trie {
 		recursiveFuzz(term, "", root,init, maxDist);
 		result = fuzzyResults.toArray(result);
 		fuzzyResults.clear();
-		return resultCount;
+		return resultCount; //FINISH THIS!
 	}
 	private void recursiveFuzz(String term, String word, Node current, int[] lastRow, int maxDist){
 		int[] thisRow = new int[lastRow.length];
