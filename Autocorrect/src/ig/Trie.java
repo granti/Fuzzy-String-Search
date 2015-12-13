@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 /**
  * Trie to store and search a dictionary.
+ * Testing some thing.
  * @author Ian Grant
  *
  */
