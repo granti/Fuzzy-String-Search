@@ -51,24 +51,23 @@ public class Trie {
 			while(scan.hasNextLine()){
 				String line = scan.nextLine();
 				current = root;
-				for(int i=0; i<line.length(); i++){
-					while(current.letter != line.charAt(i)){
-						if(current.sibling == null){
+				for(int i=0; i<line.length(); i++){				//For each letter in the word
+					while(current.letter != line.charAt(i)){	//As long as the letter doesn't match check the next node.
+						if(current.sibling == null){					//If there is no next node, make one with the desired letter.
 							current.sibling = new Node(line.charAt(i));
-						}else{
-							current = current.sibling;
 						}
+						current = current.sibling;						//Check the next node.
 					}
-					if(current.child != null){
+					if(current.child != null){							//By now the node and letter match so move to the next generation
 						current = current.child;
 					}
 					while(current.child == null && i<line.length()-1){
 						i++;
 						current.child = new Node(line.charAt(i));
-						current = current.child;
+						current = current.child;						//Once the current child is null add the rest of the word quickly.
 					}
-					current.wordEnd = true;
 				}
+				current.wordEnd = true;
 			}
 			scan.close();
 		} catch (FileNotFoundException e) {
@@ -115,7 +114,7 @@ public class Trie {
 		recursiveFuzz(term, "", root,init, maxDist);
 		result = fuzzyResults.toArray(result);
 		fuzzyResults.clear();
-		return resultCount; //FINISH THIS!
+		return resultCount;
 	}
 	private void recursiveFuzz(String term, String word, Node current, int[] lastRow, int maxDist){
 		int[] thisRow = new int[lastRow.length];
